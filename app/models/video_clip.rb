@@ -1,0 +1,2 @@
+class VideoClip < Memory
+end
