@@ -1,0 +1,2 @@
+class Carer < Person
+end
