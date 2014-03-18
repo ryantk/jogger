@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318160800) do
+ActiveRecord::Schema.define(version: 20140318160930) do
 
   create_table "comments", force: true do |t|
     t.string   "commentable_type"
@@ -70,10 +70,25 @@ ActiveRecord::Schema.define(version: 20140318160800) do
   add_index "people", ["email"], name: "index_people_on_email", unique: true
   add_index "people", ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
 
+  create_table "schedules", force: true do |t|
+    t.string   "title"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tags", force: true do |t|
     t.integer  "taggable_id"
     t.string   "taggable_type"
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tasks", force: true do |t|
+    t.datetime "due"
+    t.text     "details"
+    t.integer  "schedule_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
