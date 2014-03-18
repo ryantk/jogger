@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317200647) do
+ActiveRecord::Schema.define(version: 20140318153405) do
 
   create_table "comments", force: true do |t|
     t.string   "commentable_type"
@@ -30,10 +30,25 @@ ActiveRecord::Schema.define(version: 20140317200647) do
     t.datetime "updated_at"
   end
 
+  create_table "journal_entries", force: true do |t|
+    t.integer  "journal_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "journals", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "memories", force: true do |t|
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "memory_holder_id"
+    t.string   "memory_holder_type"
   end
 
   create_table "people", force: true do |t|
