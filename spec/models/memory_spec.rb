@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Memory do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  subject(:memory) { build(:memory) }
+
+  it_behaves_like "memory"
+
 end

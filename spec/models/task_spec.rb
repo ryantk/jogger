@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Task do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  subject(:task) { build(:task) }
+
+  it_behaves_like "taggable"
+
 end
