@@ -9,6 +9,7 @@ describe JournalEntry do
   specify { expect(entry).to respond_to(:journal) }
 
   it_behaves_like "taggable"
+  it_behaves_like "required_field", :body
 
   it "can add body" do
     body = "a long entry"

@@ -3,8 +3,9 @@ shared_examples_for "taggable" do
   specify { expect(subject.class).to respond_to(:find_by_tag) }
 
   it "can add tags" do
+    starting_tag_count = subject.tags.length
     subject.tags << build(:tag)
-    expect(subject.tags.length).to be(1)
+    expect(subject.tags.length).to be(starting_tag_count + 1)
   end
 
   describe "#find_by_tag" do

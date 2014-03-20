@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Memory do
 
-  subject(:memory) { build(:memory) }
+  subject(:memory) { Memory.new(filename: "file.jpg", uploaded: true) }
 
   it_behaves_like "memory"
 

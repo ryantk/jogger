@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318164711) do
+ActiveRecord::Schema.define(version: 20140319171819) do
 
   create_table "comments", force: true do |t|
     t.string   "commentable_type"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20140318164711) do
     t.datetime "updated_at"
     t.integer  "memory_holder_id"
     t.string   "memory_holder_type"
+    t.boolean  "uploaded"
+    t.string   "filename"
   end
 
   create_table "people", force: true do |t|
