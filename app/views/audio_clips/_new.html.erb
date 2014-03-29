@@ -1,0 +1,27 @@
+<div class="panel panel-default panel-flat">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= glyphicon("headphones") %> Audio Clips
+      <span class="right">
+        <%= link_to("View All", audio_clips_path) %>
+      </span>
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <%= form_for(AudioClip.new) do |f| %>
+      <%= f.file_field(:file, id: "audio-button-input", accept: "audio/*", capture: "microphone") %>
+
+      <audio id="audio-preview" style="max-width: 100%">
+      </audio>
+
+      <div class="center">
+        <a href="#" id="audio-button" class="btn btn-success btn-lg">
+          <%= glyphicon("headphones") %> Make an Audio Clip
+        </a>
+
+        <%= f.submit("Save", id: "audio-button-sumbit", class: "btn btn-primary btn-lg") %>
+      </div>
+    <% end %>
+  </div>
+</div>

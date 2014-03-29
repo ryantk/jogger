@@ -1,0 +1,38 @@
+<h3 class="center">Your Audio Clips</h3>
+
+<% @audio_clips.each do |audio| %>
+  <div class="panel panel-default panel-flat">
+    <div class="panel-heading">
+      Uploaded <%= audio.created_at.to_formatted_s(:long) %>
+    </div>
+
+    <div class="panel-body">
+      <%= audio_tag(audio.file.path, controls: true, class: "only-fill") %>
+
+      <% if audio.attaches_memories.any? %>
+        <h4>Attached to:</h4>
+
+        <% %i(journal_entry, task).each do |attachable| %>
+          <% if audio.attached_to(attachable).any? %>
+            <p><strong><%= attachable.to_s.humanize.pluralize.capitalize %></strong></p>
+            <ol>
+              <% audio.attached_to(attachable).each do |has_attachment| %>
+                <li><%= link_to("Created on " << has_attachment.created_at.to_formatted_s(:short), has_attachment) %></li>
+              <% end %>
+            </ol>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    
+    <div class="panel-footer">
+      <%= link_to("Delete", audio_clip_path(audio), method: :delete, data: { confirm: "Are you certain you wish to delete this Clip?" }, class: "btn btn-danger") %>
+    </div>
+  </div>
+<% end %>
+
+<% unless @audio_clips.any? %>
+  <p class="center">No audio clips to show!</p>
+<% end %>
+
+<%= render 'new' %>

@@ -1,5 +1,29 @@
 Jogger::Application.routes.draw do
   devise_for :people
+
+  root "home#index"
+
+  post 'journals/:journal_id/entries/new' => 'entries#create'
+  post 'journals/:journal_id/entries/:id' => 'entries#show'
+
+  get 'journals/:has_taggables_id/entries/tags/:tag' => 'entries#by_tag', as: "entry_tag_search"
+  get 'tasks/tags/:tag' => 'tasks#by_tag', as: "task_tag_search"
+
+  resources :journals do
+    resources :entries
+  end
+
+
+  resources :tasks
+  
+  resources :tags
+
+  resources :uploads
+
+  resources :audio_clips
+  resources :video_clips
+  resources :photographs
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

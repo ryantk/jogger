@@ -1,0 +1,27 @@
+<% entries.each do |entry| %>
+  <div class="panel panel-default panel-flat">
+    <div class="panel-heading">
+      Written: <%= entry.created_at.to_formatted_s(:long) %>
+    </div>
+    <div class="panel-body">
+      <div class="reading">
+        <%= simple_format(entry.body) %>
+      </div>
+
+      <% if entry.tags.any? %>
+        <div class="tags">
+          <strong>Tags:</strong>    
+          <% entry.tags.each do |tag| %>
+            <%= link_to(tag.title, entry_tag_search_path(tag: tag.title, has_taggables_id: entry.taggable.id)) %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= render 'memories/display', memories: entry.memories %>
+<% end %>
+
+<% unless entries.any? %>
+  <p class="center">No entries in this journal, why not write one?</p>
+<% end %>

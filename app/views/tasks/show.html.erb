@@ -1,0 +1,96 @@
+<%= form_for(@task, html: { class: "form-horizontal" }) do |f| %>
+  <div class="panel panel-default panel-flat" id="details-edit">
+    <div class="panel-heading">
+      <h3 class="panel-title">Edit Task Description</h3>
+    </div>
+
+    <div class="panel-body">
+      <%= f.text_area(:details, class: "form-control input-lg") %>
+    </div>
+
+    <div class="panel-footer">
+      <%= f.submit("Update Task", class: "btn btn-primary", id: "update-description") %>
+    </div>
+  </div>
+
+  <div class="panel panel-default panel-flat" id="details-view">
+    <div class="panel-heading">
+      <h3 class="panel-title">Task Description</h3>
+    </div>
+
+    <div class="panel-body">
+      <div class="reading">
+        <%= simple_format(@task.details) %>
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <button class="btn btn-info" id="edit-task-button">Edit Task Description</button>
+    </div>
+  </div>
+
+  <%= render 'memories/display', memories: @task.memories %>
+
+  <div class="panel panel-default panel-flat">
+    <div class="panel-heading">
+      <h3 class="panel-title">Task Details</h3>
+    </div>
+
+    <div class="panel-body">   
+      <div class="form-group">
+        <%= f.label(:created_at, class: "control-label col-md-2") %>
+        <div class="col-md-10">
+          <%= @task.created_at.to_formatted_s(:long) %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label(:due, "Task Due", class: "control-label col-md-2") %>
+        <div class="col-md-10">
+          <%= f.datetime_select(:due) %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label(:complete, "Task Completed?", class: "control-label col-md-2") %>
+        <div class="col-md-10">
+          <%= f.check_box(:complete) %>
+        </div>
+      </div>
+
+      <div class="form-gorup">
+        <label>Add a Photo, Sound or Video</label>
+        
+        <div class="scrollable well">
+          <%= render 'memories/choose', memories: current_person.memories, attachable: @task %>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <%= f.submit("Update Task", class: "btn btn-primary", id: "normal-submit") %>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  
+var updateDescriptionButton = $("#update-description");
+var editTaskButton = $('#edit-task-button');
+var normalSubmitButton = $("#normal-submit");
+var detailsEdit = $("#details-edit").hide();
+var detailsView = $("#details-view").show();
+
+$('form').on('submit', function(){ 
+  return confirm("This will save all changes on this page, Do you wish to continue?"); 
+});
+
+editTaskButton.on("click", function(e){
+  e.preventDefault();
+  detailsView.toggle();
+  detailsEdit.toggle();
+  return false;
+});
+
+</script>
+

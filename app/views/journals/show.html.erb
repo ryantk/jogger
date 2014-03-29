@@ -1,0 +1,7 @@
+<h3 class="center">
+  <%= @journal.title %>
+</h3>
+
+<%= render 'entries/index', entries: @journal.entries %>
+
+<%= render 'entries/new', journal: @journal %>

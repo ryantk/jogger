@@ -1,0 +1,45 @@
+<div class="panel panel-default panel-flat">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= glyphicon("calendar") %> Tasks
+      <span class="right">
+        <%= link_to(glyphicon("plus") << " New Task", new_task_path(user: current_person)) %>
+      </span>
+    </h3>
+  </div>
+
+  <% unless user.tasks.any? %>
+    <div class="panel-body">
+      <p class="center reading">No Tasks! Why not click "New Task" and get started.</p>
+    </div>
+  <% end %>
+
+<% if user.tasks.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th style="width: 15%">Mark Done</th>
+        <th>Description</th>
+        <th style="width: 15%">View</th>
+      </tr>
+    </thead>
+    <% user.tasks.each do |task| %>
+      <tr>
+        <td class="center">
+          <%= form_for(task) do |f| %>
+            <%= f.hidden_field(:complete, value: !task.complete) %>
+            <button class="<%= task_complete_btn_class(task.complete) %>"><%= glyphicon("ok") %></button>
+          <% end %>
+        </td>
+        <td class="reading"><%= truncate(task.details, length: 50) %></td>
+        <td><%= link_to(glyphicon("arrow-right"), task, class: "btn btn-info") %></td>
+    <% end %>
+  </table>
+<% end %>
+
+<% if user.tasks.any? %>
+  <div class="panel-footer">
+    <p><%= link_to("View all Tasks", tasks_path, class: "btn btn-primary") %></p>
+  </div>
+<% end %>
+</div>

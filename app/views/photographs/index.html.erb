@@ -1,0 +1,40 @@
+<h3 class="center">Your Photos</h3>
+
+
+<% @photographs.each_slice(3) do |slice| %>
+  <div class="row">
+    <% slice.each do |photo| %>
+      <div class="col-md-4 col-sm-4">
+        <div class="thumbnail">
+          <%= link_to(image_tag(photo.file.path, class: "only-fill"), photo.file.path) %>
+
+          <div class="caption">
+            <p>
+              Uploaded <%= photo.created_at.to_formatted_s(:long) %>
+              <%= link_to("Delete", photograph_path(photo), method: :delete, data: { confirm: "Are you certain you wish to delete this Clip?" }, class: "btn btn-sm btn-danger") %>
+            </p>
+
+            <% if photo.attaches_memories.any? %>
+              <% %i(journal_entry, task).each do |attachable| %>
+                <% if photo.attached_to(attachable).any? %>
+                  <p><strong><%= attachable.to_s.humanize.pluralize.capitalize %></strong></p>
+                  <ol>
+                    <% photo.attached_to(attachable).each do |has_attachment| %>
+                      <li><%= link_to("Created on " << has_attachment.created_at.to_formatted_s(:short), has_attachment) %></li>
+                    <% end %>
+                  </ol>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% unless @photographs.any? %>
+  <p class="center">No photos to show!</p>
+<% end %>
+
+<%= render 'new' %>

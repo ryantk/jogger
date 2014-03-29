@@ -1,0 +1,8 @@
+<% unless current_page?(root_path) %>
+  <ol class="breadcrumb">
+    <li><%= link_to("Home", root_path) %></li>
+    <li class="active">
+      <%= current_breadcrumb(request.path) %>
+    </li>
+  </ol>
+<% end %>

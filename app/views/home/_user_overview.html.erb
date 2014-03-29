@@ -1,0 +1,38 @@
+<div class="well well-sm">
+  <ul class="nav nav-pills">
+    <li class="active"><a href="#organiser" data-toggle="tab">Organiser</a></li>
+    <li><a href="#memories" data-toggle="tab">Memories</a></li>
+  </ul>
+</div>
+
+<br clear="both">
+
+<div class="tab-content">
+  <div class="tab-pane active" id="organiser">
+
+    <div class="col-md-6">
+      <%= render 'journals/overview', user: user %>
+    </div>
+
+    <div class="col-md-6">
+      <%= render 'tasks/overview', user: user %>
+    </div>    
+
+  </div>
+
+  <div class="tab-pane" id="memories">
+    
+    <div class="col-md-4">
+      <%= render 'photographs/new' %>
+    </div>
+
+    <div class="col-md-4">
+      <%= render 'audio_clips/new' %>
+    </div>
+
+    <div class="col-md-4">
+      <%= render 'video_clips/new' %>
+    </div>
+
+  </div>
+</div>

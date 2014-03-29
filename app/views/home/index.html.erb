@@ -1,0 +1,7 @@
+<% if current_person.is? :carer %>
+  <%= render 'home/carer_overview', carer: current_person %>
+<% end %>
+
+<% if current_person.is? :user %>
+  <%= render 'home/user_overview', user: current_person %>
+<% end %>

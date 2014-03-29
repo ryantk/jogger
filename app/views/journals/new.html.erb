@@ -1,0 +1,17 @@
+<h3><span class="glyphicon glyphicon-list-alt"></span> New Journal</h3>
+
+<div class="panel panel-flat">
+  <div class="panel-body">
+    <%= form_for(@journal, html: { class: "form-inline" }) do |f| %>
+      <%= f.label(:title) %>
+      
+      <div class="input-group">
+        <%= f.text_field(:title, class: "form-control") %>
+
+        <span class="input-group-btn">
+          <%= f.submit("Create", class: "btn btn-primary") %> 
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>

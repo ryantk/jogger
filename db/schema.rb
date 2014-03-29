@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319171819) do
+ActiveRecord::Schema.define(version: 20140325145248) do
+
+  create_table "attaches_memories", force: true do |t|
+    t.integer  "memory_id"
+    t.string   "memory_type"
+    t.integer  "has_attachment_id"
+    t.string   "has_attachment_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: true do |t|
     t.string   "commentable_type"
@@ -30,11 +39,20 @@ ActiveRecord::Schema.define(version: 20140319171819) do
     t.datetime "updated_at"
   end
 
+  create_table "file_uploads", force: true do |t|
+    t.string   "name"
+    t.integer  "size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "path"
+  end
+
   create_table "journal_entries", force: true do |t|
     t.integer  "journal_id"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "journals", force: true do |t|
@@ -52,6 +70,8 @@ ActiveRecord::Schema.define(version: 20140319171819) do
     t.string   "memory_holder_type"
     t.boolean  "uploaded"
     t.string   "filename"
+    t.integer  "person_id"
+    t.integer  "file_id"
   end
 
   create_table "people", force: true do |t|
@@ -80,6 +100,14 @@ ActiveRecord::Schema.define(version: 20140319171819) do
     t.datetime "updated_at"
   end
 
+  create_table "taggings", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "taggable_id"
+    t.integer  "tag_id"
+    t.string   "taggable_type"
+  end
+
   create_table "tags", force: true do |t|
     t.integer  "taggable_id"
     t.string   "taggable_type"
@@ -94,6 +122,8 @@ ActiveRecord::Schema.define(version: 20140319171819) do
     t.integer  "schedule_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.boolean  "complete"
   end
 
 end

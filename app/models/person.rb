@@ -7,4 +7,12 @@ class Person < ActiveRecord::Base
   has_many :comments
   has_many :memories
   has_many :favourites
+
+  def self.types
+    ["User", "Carer"]
+  end
+
+  def is? a_type
+    type.downcase == String(a_type).downcase
+  end
 end
