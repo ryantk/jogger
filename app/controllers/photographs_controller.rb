@@ -14,4 +14,14 @@ class PhotographsController < ApplicationController
     @photographs = current_person.photographs
   end
 
+  def destroy
+    @photograph = current_person.photographs.find(params[:id])
+
+    if @photograph.delete 
+      redirect_to :back, flash: { notice: "Successfully Deleted photograph" }
+    else
+      redirect_to :back, flash: { error: "Could not delete photograph!" }
+    end
+  end
+
 end
